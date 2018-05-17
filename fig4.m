@@ -2,16 +2,14 @@ clear all;
 
 nstar = 15;
 tstar = 20;
-td = 0.7328;
-sigmad = 0.1373;
-a0s = logspace(log10(5),log10(5),1);
-ks_a = logspace(log10(0.2),log10(1),15);
-ks_a1 = logspace(log10(0.2),log10(1),20);
-%mus_r = logspace(log10(0.1),log10(1),15);
-r0s = logspace(log10(10),log10(10),1);
-mus = logspace(log10(0.01),log10(0.5),15);
-mus_v = logspace(log10(0.01),log10(0.5),20); % only 20 point variance
- 
+td = 0.7328;        % Average division time: from experimental data
+sigmad = 0.1373;     % variance in division time from experimental data
+a0s = logspace(log10(5),log10(5),1);    %Half maxima for activator 
+ks_a = logspace(log10(0.2),log10(1),15); %production rate activator
+ks_a1 = logspace(log10(0.2),log10(1),20); %production rate activator
+r0s = logspace(log10(10),log10(10),1);  % Half maxima, K repressor
+mus = logspace(log10(0.01),log10(0.5),15); % Decay rate 
+mus_v = logspace(log10(0.01),log10(0.5),20); % Decay rate 
 %figure properties
 lw = 2;  % linewidth
 fs = 15;  %fontsize
@@ -22,11 +20,11 @@ clf;
 subplot(2,2,1);
 %activator burst and decay. K = 10; H = 1;
 a0 = a0s(1);
-var_0 = dlmread('act_K10_mu0_h3'); % \mu = 0
-var_1 = dlmread('act_K10_mu1_h3'); %\mu = k/2K
-var_2 = dlmread('act_K10_mu2_h3'); %\mu = k/K
-var_3 = dlmread('act_K10_mu0_b3'); % \mu = 0 burst b = 3
-var_5 = dlmread('act_K10_mu0_b5') % \mu = 0 burst b = 5
+var_0 = dlmread('act_K10_mu0_h3'); % \mu = 0 genrate data from folder fig4a_data/ by setting mu = 0
+var_1 = dlmread('act_K10_mu1_h3'); % genrate data from folder fig4a_data/ by setting \mu = k/2K 
+var_2 = dlmread('act_K10_mu2_h3'); % genrate data from folder fig4a_data/ by setting \mu = k/K
+var_3 = dlmread('act_K10_mu0_b3'); % genrate data from folder fig4a_data/ by setting \mu = 0 burst b = 3
+var_5 = dlmread('act_K10_mu0_b5') % genrate data from folder fig4a_data/ by setting \mu = 0 burst b = 5
 
 hold on; box on;
 plot(ks_a*tstar, var_0*nstar/tstar^2,'-g','linewidth',lw)
@@ -40,8 +38,6 @@ xlim([3 20])
 ylim([0 5])
 legend({'$\mu = 0$','$\mu = k/2K$','$\mu = k/K$',...
     '$\mu = 0$, $b =3$','$\mu = 0$, $b =5$'},'Interpreter','latex');
-%,'$\mu = 0$, $b =3$','$\mu = 0$, $b =5$
-
 
 xlabel('Production rate, $kt_*$','Interpreter','latex')
 ylabel('Variance, $\sigma_t^2x_*/t_* ^2$','Interpreter','latex')
@@ -52,10 +48,10 @@ subplot(2,2,2);
 r0 = r0s(1);
 box on; hold on;
 title('Repressor')
-var_0 = dlmread('rep_K10_mu0_h3');%dlmread('rep_k0'); % k = 0 
+var_0 = dlmread('rep_K10_mu0_h3');%genrate data from folder fig4b_data/ by setting  \mu = 0 
 var_1 = dlmread('rep_K10_mu1_h3'); %k = muK/2
 var_2 = dlmread('rep_K10_mu2_h3');%k = \muK
-var_3 = dlmread('rep_mu0_p'); % k = 0; poisson
+var_3 = dlmread('rep_mu0_p'); % k = 0; poisson genrate data from fig4b_data/withnoise
 
 plot(mus*tstar, var_0*nstar/tstar^2,'-g','linewidth',lw)
 plot(mus*tstar, var_1*nstar/tstar^2,'-b','linewidth',lw)
@@ -73,9 +69,9 @@ set(gca,'fontsize',fs)
 
 
 subplot(2,2,3)
+% genrate trajectory from fig4c_data/activator and /repressor
 
-
-traj = dlmread('act_traj');
+traj = dlmread('act_traj'); 
 t_a = traj(:,1);
 x_a = traj(:,2);
 a   = traj(:,3);
@@ -108,6 +104,8 @@ text(0.1,15,'$\bar{r}/10$','Interpreter','latex','fontsize',fs,'color','r')
 
 
 subplot(2,2,4);
+
+%generate data from fig4d_data/activator and repressor
 box on;
 hold on;
 
