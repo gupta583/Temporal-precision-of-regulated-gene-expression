@@ -7,8 +7,8 @@ nstar = 15;
 tstar = 20;
 Nr = 15;
 
-r0s = logspace(log10(1),log10(15),300); % r0 row
-repks = logspace(log10(0.01),log10(5),300); %k's 
+r0s = logspace(log10(1),log10(15),300); % Half maxima, K
+repks = logspace(log10(0.01),log10(5),300); %Decay rate, \mu
 
 
 [M,I] = min(repvariance(:));
