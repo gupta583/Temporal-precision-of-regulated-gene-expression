@@ -1,13 +1,13 @@
 clear all;
 
-M = dlmread('exp_data.csv');
-t = M(:,1);
-x = M(:,2);
+M = dlmread('exp_data.csv');  %Experimental data 
+t = M(:,1);        % time
+x = M(:,2);        % mRNA number
 area = 0;
 
 Nr = 15;
-%nstar = 15;
 
+%trial bin size
 delxmax = 12;
 delxmin = 3;
 
@@ -73,30 +73,13 @@ for i=1:length(delxs)
          area = 2*area/(nstar*tstar(oo));
          
          rho(oo) = area;
-         
-         
-          oo = oo + 1;
-          
- %         plot(area,var1,'.','MarkerSize',2*nstar,...
- %             'color',[delx/13+0.06 rand rand])
-         
-         
-%          plot(area,var1,'.','MarkerSize',3*nstar,...
-%              'color',[0 0 (delx-3)/10])
-          
-          
-       hold on
-       
-     [area var1]
-         
+         oo = oo + 1;
+
      end
      
       clear nstars
       clear tstar
-     
-     
 
-   
 end
 
 mean_rho = mean(rho)
@@ -125,34 +108,16 @@ for i=1:length(abar_nstar)
      
      lstr1{i} = ['$\langle a \rangle/{x_*} =' num2str(abar_nstar(i)) '$'];
      lstr2{i} = ['$\langle r \rangle/{x_*} =' num2str(rbar_nstar(i)) '$'];
-    % lstr3{i} = ['$n_* =' num2str(5*(i+1)) '$' ];
+   
 end
 
-
-%     h3(1)= plot(-1,-1,'.k','Markersize',30);
-%     lstr3{1} = ['$x_* = 10$' ];
-     
-%      h3(2)= plot(-1,-1,'.k','Markersize',60);
-%         lstr3{2} = ['$x_* = 20$' ];
          
 lstr3 = ['Experimental']         
-
 
 legend([h3 h1 h2],[lstr3 lstr1 lstr2],'Interpreter','latex',...
     'Position',[0.71 0.305 0.01 0.2])
 
 axis('square')
-%h2,lstr2)
-%c = colorbar;
-%ylabel(c,'Bin size, $\Delta x$','Interpreter','latex')
-%caxis([delxmin delxmax])
-
-%cvec = 0:0.01:100;
-%map = zeros(length(cvec),3);
-%for i =1:length(cvec)
-%map(i,3) = i/length(cvec);
-%end
-%colormap(map)
 
 plot(1,1,'s','color','black','markersize',20,'linewidth',2)
 text(0.44,1,'No regulation $\rightarrow$','Interpreter','latex','fontsize',23)
@@ -161,24 +126,13 @@ plot([mean_rho mean_rho],[varnce-std_variance varnce+std_variance],'-b','linewid
 
 ylim([0 1.2])
 box on;
-%cons = nstar*(exp(2)-1)*0.25/Nr
-
-
-%sminstar_rep = 4*rhostar.^2 + 1.5973*(1-2*rhostar).^2;
-%plot(rhostar,sminstar_act1...
-%     ,rhostar,sminstar_act2...
-%     ,rhostar,sminstar_act3,'color',[0 1 0]...
-%    ,rhostar,sminstar_rep);
 
 xlabel('Linearity, $\rho$','Interpreter','latex')
 ylabel('Timing variance, $ \sigma_t^2x_*/t_*^2$'...
     ,'Interpreter','latex')
 set(gca,'Fontsize',23)
-%a = get(gca,'XTickLabel');
-%set(gca,'fontsize',24)
 
 
-%print(gcf,'-dpdf', 'fig3b')
 
 
  
