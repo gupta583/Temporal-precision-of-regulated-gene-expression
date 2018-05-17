@@ -131,16 +131,6 @@ xlim([0.1 0.9])
 text(0.72,0.2,'Exp. $t_d/t_*$','fontsize',fs,'rotation',90,'Interpreter','latex')
 legend({'Activator','Repressor','No division'},'interpreter','latex','location','NW')
 
-%figure(98);
 
-bs = 1:0.1:10;
-bs_g = 1:1:10;
-data_a = dlmread('burstvsvariance_version2_cf_25');
-data_g = dlmread('burstvsvariance_gilles');
 
-%plot(bs_g,data_g,'--g','linewidth',2)
-%hold on
-%plot(bs,data_a*nstar/tstar^2,'-g','linewidth',2)
-%xlabel('Burst size, $b$','Interpreter','latex')
-%ylabel('Variance, $\sigma_t^2x_*/t_* ^2$','Interpreter','latex')
-%set(gca,'fontsize',fs+10)
+
